@@ -1,0 +1,29 @@
+{% extends "proj_app/base.html" %}
+
+{% block content %}
+<title>Register</title>
+{% if messages %}
+    {% for message in messages %}
+    <small {% if message.tags %} class = "{{message.tags}}" {% endif%}> {{message}}</small>
+    {% endfor %}
+    {% endif%}
+
+<a href="{% url 'home' %}">Home</a>
+<hr>
+<h1>Register Here!</h1>
+<form action="" method="post" novalidate>
+  {% csrf_token %}
+   {% if form.non_field_errors %}
+    {% for error in form.non_field_errors %}
+     <p>{{error}}</p>
+    {% endfor %}
+   {% endif %}
+  {% for fm in form%}
+   {{fm.label_tag}} {{fm}} {{fm.errors|striptags}} <br><br>
+  {% endfor%}
+  <input type="submit"  name="" value="Submit">
+</form>
+
+ <a href="{% url 'login' %}">Login</a>
+
+{% endblock content %}

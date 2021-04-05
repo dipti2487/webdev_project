@@ -1,0 +1,31 @@
+{% extends "proj_app/base.html" %}
+
+{% block content %}
+
+<title>Login Page</title>
+<a href="{% url 'home' %}">Home</a>
+<hr>
+<div class="container-fluid">
+  <h2>Login:</h2>
+  <form action="" method="post" novalidate>
+    {% csrf_token %}
+    {% if form.non_field_errors %}
+     {% for error in form.non_field_errors %}
+      <p>{{error}}</p>
+     {% endfor %}
+    {% endif %}
+    {% for fm in form %}
+     {{fm.label_tag}} {{fm}} {{fm.errors|striptags}} <br><br>
+    {% endfor %}
+    <button type= "Submit" name="Login">Login</button>
+  </form>
+  <div class="ml-4">
+    Don't have an account? <a href="{% url 'register' %}" class="ml-2">Signup</a>
+    </div>
+  <div class="ml-4">
+      Forgot password? <a href="{% url 'reset_password' %}" class="ml-2">Reset Password</a>
+   </div>
+</div>
+
+
+{% endblock %}                                                                                                  
